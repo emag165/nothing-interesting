@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SA Self-Drive 2026 — Decision Pack v7</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,system-ui,'Segoe UI',sans-serif;background:#0f1117;color:#e8e6e3;line-height:1.5;-webkit-text-size-adjust:100%}
+a{color:#c9a84c;text-decoration:none}a:hover{text-decoration:underline}
+.hero{background:linear-gradient(135deg,#1a1d27,#2d1f0e);padding:1.4rem 1rem;text-align:center;border-bottom:1px solid #8a7233}
+.hero h1{color:#c9a84c;font-size:1.15rem;letter-spacing:.5px}
+.hero p{color:#9ca3af;font-size:.72rem;margin-top:.2rem}
+.w{max-width:760px;margin:0 auto;padding:.6rem .8rem}
+.sh{color:#c9a84c;font-size:.92rem;font-weight:700;padding-bottom:.3rem;border-bottom:1px solid #8a7233;margin:1.4rem 0 .5rem}
+.stats{display:flex;gap:.4rem;flex-wrap:wrap;margin:.6rem 0}
+.stat{flex:1;min-width:65px;background:#1a1d27;border:1px solid #2d3142;border-radius:8px;padding:.4rem;text-align:center}
+.stat .n{font-size:1.1rem;color:#c9a84c;font-weight:700}
+.stat .l{font-size:.58rem;color:#9ca3af;text-transform:uppercase}
+.note{border-radius:8px;padding:.5rem .6rem;margin:.5rem 0;font-size:.75rem}
+.note-r{background:rgba(248,113,113,.08);border:1px solid rgba(248,113,113,.3);color:#f87171}
+.note-o{background:rgba(251,146,60,.08);border:1px solid rgba(251,146,60,.3);color:#fb923c}
+.note-g{background:rgba(52,211,153,.08);border:1px solid rgba(52,211,153,.3);color:#34d399}
+.note-b{background:rgba(96,165,250,.08);border:1px solid rgba(96,165,250,.3);color:#60a5fa}
+.note-y{background:rgba(234,179,8,.08);border:1px solid rgba(234,179,8,.3);color:#eab308}
+.tw{overflow-x:auto;-webkit-overflow-scrolling:touch;margin:.4rem 0}
+table{width:100%;border-collapse:collapse;font-size:.73rem}
+th{text-align:left;color:#c9a84c;padding:.35rem .3rem;border-bottom:1px solid #8a7233;font-weight:600;white-space:nowrap}
+td{padding:.35rem .3rem;border-bottom:1px solid #2d3142;vertical-align:top}
+.hi{color:#f87171;font-weight:600}.md{color:#fb923c;font-weight:600}.ok{color:#34d399}.bl{color:#60a5fa}.gold{color:#c9a84c;font-weight:700}
+.dim{color:#6b7280;font-size:.68rem}
+.locked{color:#34d399;font-size:.6rem;font-weight:700;vertical-align:middle}
+.badge{display:inline-block;padding:2px 8px;border-radius:4px;font-size:.63rem;font-weight:700;margin-left:.3rem;vertical-align:middle}
+.badge-a{background:rgba(52,211,153,.15);color:#34d399}
+.badge-b{background:rgba(251,146,60,.15);color:#fb923c}
+.tabs{display:flex;gap:.3rem;margin:.6rem 0;flex-wrap:wrap}
+.tab{padding:.4rem .8rem;border-radius:6px;font-size:.74rem;font-weight:600;cursor:pointer;border:1px solid #2d3142;background:#1a1d27;color:#9ca3af;transition:all .2s}
+.tab:hover{border-color:#c9a84c;color:#c9a84c}
+.tab.active{background:#c9a84c;color:#000;border-color:#c9a84c}
+.tab-content{display:none}.tab-content.active{display:block}
+.hotel{background:#1a1d27;border:1px solid #2d3142;border-radius:8px;padding:.55rem;margin-bottom:.4rem}
+.hotel.top{border-color:#c9a84c}
+.hotel.transit{border-color:#fb923c}
+.hotel-name{font-size:.82rem;font-weight:700;color:#e8e6e3}
+.hotel-tier{display:inline-block;padding:1px 6px;border-radius:4px;font-size:.58rem;font-weight:600;margin-left:.3rem}
+.tier-u{background:rgba(201,168,76,.2);color:#c9a84c}
+.tier-l{background:rgba(52,211,153,.15);color:#34d399}
+.tier-b{background:rgba(96,165,250,.15);color:#60a5fa}
+.tier-t{background:rgba(248,113,113,.15);color:#f87171}
+.hotel-detail{font-size:.7rem;color:#9ca3af;margin-top:.2rem}
+.hotel-link{font-size:.68rem;margin-top:.2rem}
+.hotel-inc{font-size:.68rem;color:#34d399;margin-top:.15rem}
+.compare{background:#1a1d27;border:1px solid #2d3142;border-radius:8px;padding:.6rem;margin:.5rem 0}
+.compare th{font-size:.68rem}.compare td{font-size:.7rem}
+.map-btn{display:block;background:linear-gradient(135deg,#c9a84c,#8a7233);color:#000;text-align:center;padding:.7rem;border-radius:10px;font-weight:700;font-size:.85rem;margin:.5rem 0;text-decoration:none}
+.map-btn:hover{opacity:.9;text-decoration:none}
+.map-btn small{display:block;font-weight:400;font-size:.68rem;margin-top:.2rem;color:#333}
+.pace-bar{display:flex;gap:2px;margin:.4rem 0;flex-wrap:wrap}
+.pace-day{width:18px;height:18px;border-radius:3px;font-size:.5rem;display:flex;align-items:center;justify-content:center;font-weight:700}
+.pace-drive{background:#fb923c;color:#000}
+.pace-rest{background:#34d399;color:#000}
+.pace-sani{background:#a855f7;color:#fff}
+.pace-drop{background:#60a5fa;color:#000}
+.warn-row{background:rgba(248,113,113,.04)}
+.foot{text-align:center;padding:.8rem;color:#9ca3af;font-size:.56rem;margin-top:1rem;border-top:1px solid #2d3142}
+@media(max-width:600px){
+  table{font-size:.78rem}th{font-size:.74rem}
+  .dim{font-size:.75rem}.note{font-size:.78rem}
+  .stats{display:grid;grid-template-columns:1fr 1fr;gap:.4rem}.stat{min-width:0}
+  .tabs{gap:.25rem}.tab{flex:1;text-align:center;padding:.45rem .4rem;font-size:.72rem}
+}
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <h1>SA SELF-DRIVE 2026</h1>
+  <p>Decision Pack v7 — Family Vote: Plan A vs Plan B · 24 Mar 2026</p>
+  <p style="color:#eab308;font-weight:600;margin-top:.3rem">All times Google Maps–verified 24 Mar 2026 · Both routes share 5 locked nights</p>
+</div>
+
+<div class="w">
+
+<!-- KEY STATS -->
+<div class="stats">
+  <div class="stat"><div class="n">24</div><div class="l">Total Nights</div></div>
+  <div class="stat"><div class="n">20</div><div class="l">Vehicle</div></div>
+  <div class="stat"><div class="n">4</div><div class="l">Cape Town</div></div>
+  <div class="stat"><div class="n">5</div><div class="l">Locked</div></div>
+  <div class="stat"><div class="n">2</div><div class="l">Plans</div></div>
+</div>
+
+<div class="note note-y">
+  <strong>What changed from v6:</strong> The 3-plan Eastern Cape vote is replaced by a cleaner 2-plan choice. Both plans now include Phinda. Hermanus is dropped (was 2N). Bloemfontein transit eliminated. Night math rebalanced. Phinda is 3N in Plan A (pacing recovery after 1N+2N+2N opening) and 2N in Plan B (coastal corridor constraint).
+</div>
+
+<!-- ============================== -->
+<!-- 1. CONFIRMED BOOKINGS -->
+<!-- ============================== -->
+<div class="sh">1. Confirmed Bookings (5N Locked — Both Plans)</div>
+
+<div class="tw">
+<table>
+  <tr><th>#</th><th>Property</th><th>Check-in</th><th>Check-out</th><th>N</th><th>Status</th></tr>
+  <tr><td>1</td><td>The Highlander, Dullstroom</td><td><strong>29 Apr</strong></td><td><strong>30 Apr</strong></td><td>1</td><td class="ok">✓ Via brother</td></tr>
+  <tr><td>2</td><td>Royal Malewane, Thornybush</td><td><strong>30 Apr</strong></td><td><strong>2 May</strong></td><td>2</td><td class="hi">NON-REFUNDABLE</td></tr>
+  <tr><td>3</td><td>Jock Safari Lodge, Kruger</td><td><strong>2 May</strong></td><td><strong>4 May</strong></td><td>2</td><td class="md">50% if >30d</td></tr>
+</table>
+</div>
+
+<!-- ============================== -->
+<!-- 2. THE TWO PLANS -->
+<!-- ============================== -->
+<div class="sh">2. The Two Plans — Tap to Compare</div>
+<p style="font-size:.72rem;color:#9ca3af;margin-bottom:.4rem">Both plans share the same 5 locked nights (Days 1–5). Everything from Day 6 onward differs.</p>
+
+<div class="tabs" id="route-tabs">
+  <div class="tab active" onclick="showRoute('a')">Plan A · Mixed + Sani</div>
+  <div class="tab" onclick="showRoute('b')">Plan B · Coastal</div>
+</div>
+
+<!-- ============ PLAN A ============ -->
+<div class="tab-content active" id="route-a">
+
+<div class="note note-g">
+  <strong>Plan A — Mixed + Phinda via Sani Pass</strong> <span class="badge badge-a">MOST DIVERSE</span><br>
+  Kruger → Phinda 3N → Sani Pass 4x4 → Karoo interior → Kwandwe Big 5 → Garden Route → CT.<br>
+  Maximum landscape variety. Gets both KZN wildlife AND mountains/Karoo.
+</div>
+
+<div class="tw">
+<table>
+  <tr><th>Date</th><th>Route</th><th>Km</th><th>Drive</th><th>Nights</th><th>Property</th></tr>
+  <tr style="opacity:.55"><td><strong>29 Apr</strong></td><td>Midrand → Dullstroom</td><td>262</td><td>3.2h</td><td>1N</td><td>The Highlander 🔒</td></tr>
+  <tr style="opacity:.55"><td><strong>30 Apr</strong></td><td>Dullstroom → Royal Malewane</td><td>227</td><td>3.3h</td><td>2N</td><td>Royal Malewane 🔒</td></tr>
+  <tr style="opacity:.55"><td><strong>2 May</strong></td><td>Royal Malewane → Jock</td><td>128</td><td>3.1h</td><td>2N</td><td>Jock Safari Lodge 🔒</td></tr>
+  <tr><td><strong>4 May</strong></td><td>Jock → Phinda</td><td>414</td><td class="hi">6.6h</td><td class="gold">3N</td><td>&Beyond Phinda Rock Lodge</td></tr>
+  <tr><td><strong>7 May</strong></td><td>Phinda → Underberg</td><td>494</td><td class="hi">6.3h</td><td>2N</td><td>Moorcroft Manor</td></tr>
+  <tr><td>8 May</td><td>⛰ Sani Pass day return</td><td>~150</td><td>Full day</td><td>—</td><td>(same)</td></tr>
+  <tr class="warn-row"><td><strong>9 May</strong></td><td>Underberg → Aliwal North</td><td>529</td><td class="hi">7.0h ⚠</td><td>1N</td><td>La Riviera Guesthouse</td></tr>
+  <tr><td><strong>10 May</strong></td><td>Aliwal North → Samara</td><td>353</td><td>3.9h</td><td class="gold">3N</td><td>Samara — The Manor</td></tr>
+  <tr><td><strong>13 May</strong></td><td>Samara → Kwandwe</td><td>226</td><td class="ok">3.1h</td><td class="gold">3N</td><td>Kwandwe Melton Manor</td></tr>
+  <tr><td><strong>16 May</strong></td><td>Kwandwe → Plett</td><td>392</td><td class="md">4.6h</td><td class="gold">3N</td><td>Tsala Treetop Lodge</td></tr>
+  <tr class="warn-row"><td><strong>19 May</strong></td><td>Plett → Cape Town (drop)</td><td>502</td><td class="hi">6.0h</td><td>4N</td><td>Cape Town hotel TBD</td></tr>
+</table>
+</div>
+
+<p style="font-size:.7rem;color:#9ca3af;margin:.3rem 0"><strong>24 nights:</strong> 1N Dullstroom + 2N Malewane + 2N Jock + <strong>3N Phinda</strong> + 2N Underberg + 1N Aliwal + <strong>3N Samara</strong> + <strong>3N Kwandwe</strong> + <strong>3N Plett</strong> + 4N CT · <strong>All times Google Maps–verified 24 Mar 2026</strong></p>
+
+<div style="margin:.5rem 0">
+<div style="font-size:.68rem;color:#34d399;font-weight:600;margin-bottom:.2rem">PLAN A PACING</div>
+<div class="pace-bar">
+  <div class="pace-day pace-drive" title="29 Apr">D</div>
+  <div class="pace-day pace-drive" title="30 Apr">D</div>
+  <div class="pace-day pace-rest" title="1 May">R</div>
+  <div class="pace-day pace-drive" title="2 May">D</div>
+  <div class="pace-day pace-rest" title="3 May">R</div>
+  <div class="pace-day pace-drive" title="4 May: Jock→Phinda 6.6h">D</div>
+  <div class="pace-day pace-rest" title="5 May">R</div>
+  <div class="pace-day pace-rest" title="6 May">R</div>
+  <div class="pace-day pace-drive" title="7 May: Phinda→Underberg 6.3h">D</div>
+  <div class="pace-day pace-sani" title="8 May: Sani Pass">S</div>
+  <div class="pace-day pace-drive" title="9 May: Underberg→Aliwal 7.0h ⚠">D</div>
+  <div class="pace-day pace-drive" title="10 May: Aliwal→Samara 3.9h">D</div>
+  <div class="pace-day pace-rest" title="11 May">R</div>
+  <div class="pace-day pace-rest" title="12 May">R</div>
+  <div class="pace-day pace-drive" title="13 May: Samara→Kwandwe 3.1h">D</div>
+  <div class="pace-day pace-rest" title="14 May">R</div>
+  <div class="pace-day pace-rest" title="15 May">R</div>
+  <div class="pace-day pace-drive" title="16 May: Kwandwe→Plett 4.6h">D</div>
+  <div class="pace-day pace-rest" title="17 May">R</div>
+  <div class="pace-day pace-rest" title="18 May">R</div>
+  <div class="pace-day pace-drop" title="19 May: Plett→CT 6.0h">CT</div>
+</div>
+<div style="font-size:.62rem;color:#6b7280">
+  <span style="display:inline-block;width:10px;height:10px;background:#fb923c;border-radius:2px;vertical-align:middle"></span> Drive
+  <span style="display:inline-block;width:10px;height:10px;background:#34d399;border-radius:2px;vertical-align:middle;margin-left:.3rem"></span> Rest
+  <span style="display:inline-block;width:10px;height:10px;background:#a855f7;border-radius:2px;vertical-align:middle;margin-left:.3rem"></span> Sani
+  <span style="display:inline-block;width:10px;height:10px;background:#60a5fa;border-radius:2px;vertical-align:middle;margin-left:.3rem"></span> CT drop
+  &nbsp;— Second half rhythm: <strong>3N→3N→3N</strong>. Beautiful.
+</div>
+</div>
+
+<div class="note note-g">
+  <strong>What you get:</strong> Phinda Big 5 (3N recovery break) + Sani Pass (4x4 centrepiece) + Samara Karoo (cheetah tracking, stargazing, Valley of Desolation) + Kwandwe (malaria-free Big 5, rhino on foot) + Garden Route. Six biome types. Second half flows in perfect 3N-3N-3N rhythm.<br><br>
+  <strong>What you miss:</strong> No Wild Coast. No Addo elephants. No coastal run between KZN and Eastern Cape.
+</div>
+
+<div class="note note-r">
+  <strong>Risks (updated with Google Maps audit):</strong> <strong>4 legs over 6h</strong> — Jock→Phinda 6.6h, Phinda→Underberg 6.3h, <strong>Underberg→Aliwal 7.0h ⚠</strong>, Plett→CT 6.0h. Days 9–12 (Sani → 7h drive → drive) are the hardest stretch. Aliwal North transit = 1 guesthouse-level night. Sani Pass visa for Thai passport being verified. If Sani is weather-closed, Underberg still has Drakensberg hiking but loses the 4x4 centrepiece.
+</div>
+
+<a class="map-btn" href="https://www.google.com/maps/dir/-25.98,28.13/-25.40,30.04/-24.46,31.15/-25.12,31.60/-27.85,32.35/-29.75,29.48/-30.69,26.71/-32.19,24.85/-33.14,26.44/-33.95,23.35/-33.92,18.42" target="_blank">
+  Open Plan A in Google Maps ↗
+  <small>Midrand → Dullstroom → Malewane → Jock → Phinda → Underberg → Aliwal Nth → Samara → Kwandwe → Plett → CT</small>
+</a>
+
+<!-- PLAN A LODGES -->
+<h3 style="color:#c9a84c;font-size:.82rem;margin:1rem 0 .3rem">Plan A — Lodge Lineup</h3>
+
+<div class="hotel top">
+  <div class="hotel-name">&Beyond Phinda Rock Lodge <span class="hotel-tier tier-u">Ultra-luxury</span></div>
+  <div class="hotel-detail">3N · 4–7 May · 6 cliff-face suites, private plunge pools. Big 5 + iSimangaliso wetlands day trip. All-inclusive (meals, drinks, game drives, walks).</div>
+  <div class="hotel-inc">✓ All meals, drinks, 2× daily game drives, bush walks, laundry, Wi-Fi</div>
+  <div class="hotel-link"><a href="https://www.andbeyond.com/our-lodges/africa/south-africa/kwazulu-natal/phinda-private-game-reserve/andbeyond-phinda-rock-lodge/" target="_blank">Book → andbeyond.com</a> · <a href="https://maps.app.goo.gl/PhindaRock" target="_blank">Map</a></div>
+</div>
+
+<div class="hotel">
+  <div class="hotel-name">Moorcroft Manor <span class="hotel-tier tier-b">Boutique</span></div>
+  <div class="hotel-detail">2N · 7–9 May · Himeville (8 km from Underberg). 12-room converted farmhouse. Best in Southern Drakensberg. Sani Pass base camp. DBB (dinner, bed, breakfast).</div>
+  <div class="hotel-link"><a href="https://www.moorcroft.co.za" target="_blank">Book → moorcroft.co.za</a> · Map: Himeville, KZN</div>
+</div>
+
+<div class="hotel transit">
+  <div class="hotel-name">La Riviera Guesthouse <span class="hotel-tier tier-t">Transit</span></div>
+  <div class="hotel-detail">1N · 9–10 May · Aliwal North. #1 rated in town. Spa, pool, restaurant. Hot springs nearby. Push-through night — no luxury options exist here.</div>
+  <div class="hotel-link">Direct enquiry · Map: Aliwal North, Eastern Cape</div>
+</div>
+
+<div class="hotel top">
+  <div class="hotel-name">Samara — The Manor (exclusive use) <span class="hotel-tier tier-u">Ultra-luxury</span></div>
+  <div class="hotel-detail">3N · 10–13 May · 67,000-acre Karoo reserve. 4-suite sole-use villa. Private vehicle, guide, tracker, chef. Cheetah tracking, Valley of Desolation, world-class stargazing.</div>
+  <div class="hotel-inc">✓ Fully all-inclusive: all meals, all beverages, all game activities, laundry</div>
+  <div class="hotel-link"><a href="https://www.samara.co.za/rates/" target="_blank">Book → samara.co.za</a> · <a href="https://maps.app.goo.gl/Samara" target="_blank">Map</a></div>
+</div>
+
+<div class="hotel top">
+  <div class="hotel-name">Kwandwe Melton Manor (exclusive use) <span class="hotel-tier tier-u">Ultra-luxury</span></div>
+  <div class="hotel-detail">3N · 13–16 May · 22,000 ha malaria-free Big 5. 4-bedroom sole-use villa. Private vehicle, ranger, tracker, chef. Rhino tracking on foot, Great Fish River walks, night drives.</div>
+  <div class="hotel-inc">✓ All meals, selected drinks, private vehicle & ranger/tracker, laundry</div>
+  <div class="hotel-link"><a href="https://www.kwandwe.com/rates-enquiries/" target="_blank">Book → kwandwe.com</a> · <a href="https://maps.app.goo.gl/Kwandwe" target="_blank">Map</a></div>
+</div>
+
+<div class="hotel top">
+  <div class="hotel-name">Tsala Treetop Lodge <span class="hotel-tier tier-u">Ultra-luxury</span></div>
+  <div class="hotel-detail">3N · 16–19 May · Plettenberg Bay. Forest canopy villas with private infinity pools. Suspended walkways. Base for Tsitsikamma, Robberg, Knysna.</div>
+  <div class="hotel-inc">✓ Breakfast + dinner (MAP). Lunch, drinks, spa are extra.</div>
+  <div class="hotel-link"><a href="https://tsala.hunterhotels.com/rates-and-information/" target="_blank">Book → tsala.hunterhotels.com</a> · <a href="https://maps.app.goo.gl/Tsala" target="_blank">Map</a></div>
+</div>
+
+</div><!-- end Plan A -->
+
+<!-- ============ PLAN B ============ -->
+<div class="tab-content" id="route-b">
+
+<div class="note note-o">
+  <strong>Plan B — Coastal Corridor</strong> <span class="badge badge-b">MOST WILDLIFE</span><br>
+  Kruger → Phinda 2N → Umhlanga → GweGwe Wild Coast → Chintsa → Addo elephants → Kwandwe Big 5 → Garden Route → CT.<br>
+  Three post-Kruger wildlife reserves. No inland detour. No visa dependency.
+</div>
+
+<div class="tw">
+<table>
+  <tr><th>Date</th><th>Route</th><th>Km</th><th>Drive</th><th>Nights</th><th>Property</th></tr>
+  <tr style="opacity:.55"><td><strong>29 Apr</strong></td><td>Midrand → Dullstroom</td><td>262</td><td>3.2h</td><td>1N</td><td>The Highlander 🔒</td></tr>
+  <tr style="opacity:.55"><td><strong>30 Apr</strong></td><td>Dullstroom → Royal Malewane</td><td>227</td><td>3.3h</td><td>2N</td><td>Royal Malewane 🔒</td></tr>
+  <tr style="opacity:.55"><td><strong>2 May</strong></td><td>Royal Malewane → Jock</td><td>128</td><td>3.1h</td><td>2N</td><td>Jock Safari Lodge 🔒</td></tr>
+  <tr><td><strong>4 May</strong></td><td>Jock → Phinda</td><td>414</td><td class="hi">6.6h</td><td>2N</td><td>&Beyond Phinda Rock Lodge</td></tr>
+  <tr><td><strong>6 May</strong></td><td>Phinda → Umhlanga</td><td>268</td><td>3.3h</td><td>1N</td><td>The Oyster Box</td></tr>
+  <tr><td><strong>7 May</strong></td><td>Umhlanga → GweGwe</td><td>367</td><td class="hi">5.8h</td><td>2N</td><td>GweGwe Beach Lodge</td></tr>
+  <tr class="warn-row"><td><strong>9 May</strong></td><td>GweGwe → Chintsa</td><td>450</td><td class="hi">7.4h ⚠</td><td>2N</td><td>Prana Lodge</td></tr>
+  <tr><td><strong>11 May</strong></td><td>Chintsa → Addo</td><td>314</td><td class="md">4.1h</td><td>2N</td><td>Gorah Elephant Camp</td></tr>
+  <tr><td><strong>13 May</strong></td><td>Addo → Kwandwe</td><td>129</td><td class="ok">2.0h</td><td class="gold">3N</td><td>Kwandwe Melton Manor</td></tr>
+  <tr><td><strong>16 May</strong></td><td>Kwandwe → Plett</td><td>392</td><td class="md">4.6h</td><td class="gold">3N</td><td>Tsala Treetop Lodge</td></tr>
+  <tr class="warn-row"><td><strong>19 May</strong></td><td>Plett → Cape Town (drop)</td><td>502</td><td class="hi">6.0h</td><td>4N</td><td>Cape Town hotel TBD</td></tr>
+</table>
+</div>
+
+<p style="font-size:.7rem;color:#9ca3af;margin:.3rem 0"><strong>24 nights:</strong> 1N Dullstroom + 2N Malewane + 2N Jock + <strong>2N Phinda</strong> + 1N Umhlanga + <strong>2N GweGwe</strong> + <strong>2N Chintsa</strong> + <strong>2N Addo</strong> + <strong>3N Kwandwe</strong> + <strong>3N Plett</strong> + 4N CT · <strong>All times Google Maps–verified 24 Mar 2026</strong></p>
+
+<div style="margin:.5rem 0">
+<div style="font-size:.68rem;color:#fb923c;font-weight:600;margin-bottom:.2rem">PLAN B PACING</div>
+<div class="pace-bar">
+  <div class="pace-day pace-drive" title="29 Apr">D</div>
+  <div class="pace-day pace-drive" title="30 Apr">D</div>
+  <div class="pace-day pace-rest" title="1 May">R</div>
+  <div class="pace-day pace-drive" title="2 May">D</div>
+  <div class="pace-day pace-rest" title="3 May">R</div>
+  <div class="pace-day pace-drive" title="4 May: Jock→Phinda 6.6h">D</div>
+  <div class="pace-day pace-rest" title="5 May">R</div>
+  <div class="pace-day pace-drive" title="6 May: Phinda→Umhlanga 3.3h">D</div>
+  <div class="pace-day pace-drive" title="7 May: Umhlanga→GweGwe 5.8h">D</div>
+  <div class="pace-day pace-rest" title="8 May">R</div>
+  <div class="pace-day pace-drive" title="9 May: GweGwe→Chintsa 7.4h ⚠">D</div>
+  <div class="pace-day pace-rest" title="10 May">R</div>
+  <div class="pace-day pace-drive" title="11 May: Chintsa→Addo 4.1h">D</div>
+  <div class="pace-day pace-rest" title="12 May">R</div>
+  <div class="pace-day pace-drive" title="13 May: Addo→Kwandwe 2.0h">D</div>
+  <div class="pace-day pace-rest" title="14 May">R</div>
+  <div class="pace-day pace-rest" title="15 May">R</div>
+  <div class="pace-day pace-drive" title="16 May: Kwandwe→Plett 4.6h">D</div>
+  <div class="pace-day pace-rest" title="17 May">R</div>
+  <div class="pace-day pace-rest" title="18 May">R</div>
+  <div class="pace-day pace-drop" title="19 May: Plett→CT 6.0h">CT</div>
+</div>
+<div style="font-size:.62rem;color:#6b7280">
+  <span style="display:inline-block;width:10px;height:10px;background:#fb923c;border-radius:2px;vertical-align:middle"></span> Drive
+  <span style="display:inline-block;width:10px;height:10px;background:#34d399;border-radius:2px;vertical-align:middle;margin-left:.3rem"></span> Rest
+  <span style="display:inline-block;width:10px;height:10px;background:#60a5fa;border-radius:2px;vertical-align:middle;margin-left:.3rem"></span> CT drop
+  &nbsp;— Max 2 consecutive drives. Even pacing throughout.
+</div>
+</div>
+
+<div class="note note-g">
+  <strong>What you get:</strong> Three post-Kruger wildlife reserves (Phinda + Addo 600 elephants + Kwandwe). GweGwe Michelin Key Wild Coast lodge. Zero visa dependency. Zero transit-tier accommodation (Umhlanga = 5-star Oyster Box). Never more than 2 consecutive drives.<br><br>
+  <strong>What you miss:</strong> No Sani Pass. No Karoo. No mountains. No 4x4 utilisation. No 3N recovery break until Kwandwe (night 13).
+</div>
+
+<div class="note note-r">
+  <strong>Risks (updated with Google Maps audit):</strong> <strong>GweGwe→Chintsa estimated 7.3h ⚠</strong> — worst single leg of either plan (slow N2, Mthatha area, Wild Coast friction). Umhlanga→GweGwe ~5.7h also long. Phinda at 2N breaks the pacing preference — no 3N stay until Kwandwe. 3 post-Kruger reserves may feel safari-heavy. Plett→CT 6.0h with zero margin.
+</div>
+
+<div class="note note-o">
+  <strong>⚠ Pacing flag:</strong> After the opening 1N+2N+2N, Plan B goes into 2N Phinda → 1N Umhlanga → 2N GweGwe → 2N Chintsa → 2N Addo. That's five stops in a row at 1–2 nights each. The first 3N stay doesn't arrive until Kwandwe on Day 15. Plan A delivers a 3N break at Phinda (Day 6) and then 3N-3N-3N for the second half.
+</div>
+
+<a class="map-btn" href="https://www.google.com/maps/dir/-25.98,28.13/-25.40,30.04/-24.46,31.15/-25.12,31.60/-27.85,32.35/-29.73,31.09/-31.28,29.97/-32.83,28.08/-33.45,25.75/-33.14,26.44/-33.95,23.35/-33.92,18.42" target="_blank">
+  Open Plan B in Google Maps ↗
+  <small>Midrand → Dullstroom → Malewane → Jock → Phinda → Umhlanga → GweGwe → Chintsa → Addo → Kwandwe → Plett → CT</small>
+</a>
+
+<!-- PLAN B LODGES -->
+<h3 style="color:#c9a84c;font-size:.82rem;margin:1rem 0 .3rem">Plan B — Lodge Lineup</h3>
+
+<div class="hotel top">
+  <div class="hotel-name">&Beyond Phinda Rock Lodge <span class="hotel-tier tier-u">Ultra-luxury</span></div>
+  <div class="hotel-detail">2N · 4–6 May · 6 cliff-face suites, private plunge pools. Big 5 + iSimangaliso. All-inclusive.</div>
+  <div class="hotel-inc">✓ All meals, drinks, 2× daily game drives, bush walks, laundry</div>
+  <div class="hotel-link"><a href="https://www.andbeyond.com/our-lodges/africa/south-africa/kwazulu-natal/phinda-private-game-reserve/andbeyond-phinda-rock-lodge/" target="_blank">Book → andbeyond.com</a> · <a href="https://maps.app.goo.gl/PhindaRock" target="_blank">Map</a></div>
+</div>
+
+<div class="hotel">
+  <div class="hotel-name">The Oyster Box <span class="hotel-tier tier-l">5-star</span></div>
+  <div class="hotel-detail">1N · 6–7 May · Umhlanga. Iconic beachfront. 24/7 security, valet parking, lighthouse bar. Legendary High Tea. Pool/beach afternoon.</div>
+  <div class="hotel-inc">✓ B&B only. Lunch/dinner extra.</div>
+  <div class="hotel-link"><a href="https://www.booking.com/hotel/za/the-oyster-box.html" target="_blank">Book → booking.com</a> · <a href="https://www.go2africa.com/accommodation/the-oyster-box" target="_blank">go2africa.com</a></div>
+</div>
+
+<div class="hotel top">
+  <div class="hotel-name">GweGwe Beach Lodge <span class="hotel-tier tier-u">Ultra-luxury</span></div>
+  <div class="hotel-detail">2N · 7–9 May · Mkambati Nature Reserve, Wild Coast. 9 suites. Condé Nast Hot List 2025 + Michelin Key. Pondoland cliffs, waterfalls, private beach. Gravel access road.</div>
+  <div class="hotel-inc">✓ Fully inclusive (meals + activities)</div>
+  <div class="hotel-link"><a href="https://naturalselection.travel/camps/gwegwe-beach-lodge-wild-coast/" target="_blank">Book → naturalselection.travel</a></div>
+</div>
+
+<div class="hotel">
+  <div class="hotel-name">Prana Lodge <span class="hotel-tier tier-l">5-star boutique</span></div>
+  <div class="hotel-detail">2N · 9–11 May · Chintsa Bay. ~8 suites. Private plunge pools, walled gardens, 24hr biometric security. 21 km private beach. Thai wellness spa. Recovery stop after Wild Coast.</div>
+  <div class="hotel-inc">✓ DBB (dinner, bed, breakfast)</div>
+  <div class="hotel-link"><a href="https://www.timbuktutravel.com/hotel/prana-lodge" target="_blank">Book → timbuktutravel.com</a> · <a href="https://farandwild.travel/us/africa/south-africa/eastern-cape/prana-lodge-wild-coast" target="_blank">farandwild.travel</a></div>
+</div>
+
+<div class="hotel top">
+  <div class="hotel-name">Gorah Elephant Camp <span class="hotel-tier tier-u">Ultra-luxury</span></div>
+  <div class="hotel-detail">2N · 11–13 May · Inside Addo NP. Only private concession in the park. 600+ elephants. Self-drive Land Cruisers in park + guided drives.</div>
+  <div class="hotel-inc">✓ All meals, game activities</div>
+  <div class="hotel-link"><a href="https://gorah.hunterhotels.com" target="_blank">Book → gorah.hunterhotels.com</a></div>
+</div>
+
+<div class="hotel top">
+  <div class="hotel-name">Kwandwe Melton Manor (exclusive use) <span class="hotel-tier tier-u">Ultra-luxury</span></div>
+  <div class="hotel-detail">3N · 13–16 May · 22,000 ha malaria-free Big 5. 4-bedroom sole-use villa. Private vehicle, ranger, tracker, chef.</div>
+  <div class="hotel-inc">✓ All meals, selected drinks, private vehicle & ranger/tracker</div>
+  <div class="hotel-link"><a href="https://www.kwandwe.com/rates-enquiries/" target="_blank">Book → kwandwe.com</a> · <a href="https://maps.app.goo.gl/Kwandwe" target="_blank">Map</a></div>
+</div>
+
+<div class="hotel top">
+  <div class="hotel-name">Tsala Treetop Lodge <span class="hotel-tier tier-u">Ultra-luxury</span></div>
+  <div class="hotel-detail">3N · 16–19 May · Plettenberg Bay. Forest canopy villas. Private infinity pools. Tsitsikamma, Robberg, Knysna.</div>
+  <div class="hotel-inc">✓ Breakfast + dinner (MAP). Lunch, drinks extra.</div>
+  <div class="hotel-link"><a href="https://tsala.hunterhotels.com/rates-and-information/" target="_blank">Book → tsala.hunterhotels.com</a> · <a href="https://maps.app.goo.gl/Tsala" target="_blank">Map</a></div>
+</div>
+
+</div><!-- end Plan B -->
+
+<!-- ============================== -->
+<!-- 3. HEAD-TO-HEAD COMPARISON -->
+<!-- ============================== -->
+<div class="sh">3. Head-to-Head Comparison</div>
+
+<div class="compare">
+<div class="tw">
+<table>
+  <tr><th style="min-width:140px"></th><th><span class="badge badge-a">A · Mixed+Sani</span></th><th><span class="badge badge-b">B · Coastal</span></th></tr>
+  <tr><td class="gold">Route story</td><td>Wildlife → Mountains → Karoo → Coast</td><td>Wildlife → Coast → Coast → Coast</td></tr>
+  <tr><td>Phinda</td><td class="ok"><strong>3N</strong> (pacing ✓)</td><td class="md">2N (pacing ⚠)</td></tr>
+  <tr><td>Sani Pass 4x4</td><td class="ok">✓ Full day</td><td>✗</td></tr>
+  <tr><td>Karoo (Samara)</td><td class="ok">3N</td><td>✗</td></tr>
+  <tr><td>Wild Coast (GweGwe)</td><td>✗</td><td class="ok">2N (Michelin Key)</td></tr>
+  <tr><td>Addo elephants</td><td>✗</td><td class="ok">2N (600+ herd)</td></tr>
+  <tr><td>Kwandwe</td><td>3N</td><td>3N</td></tr>
+  <tr><td>Plett (Tsala)</td><td>3N</td><td>3N</td></tr>
+  <tr><td>Post-Kruger Big 5</td><td>2 reserves</td><td class="ok"><strong>3 reserves</strong></td></tr>
+  <tr><td>Biome diversity</td><td class="ok"><strong>6+ types</strong></td><td>5 types</td></tr>
+  <tr><td>4x4 utilisation</td><td class="ok"><strong>High</strong> (Sani + passes)</td><td>Low (gravel only)</td></tr>
+  <tr><td>Transit-tier nights</td><td class="md">1 (Aliwal guesthouse)</td><td class="ok">0</td></tr>
+  <tr><td>Legs over 6h</td><td class="hi">4 (incl. 7h Underberg→Aliwal)</td><td class="hi">3 (incl. 7.4h GweGwe→Chintsa)</td></tr>
+  <tr><td>Worst single leg</td><td class="hi">7.0h (Underberg→Aliwal) ⚠</td><td class="hi">7.4h (GweGwe→Chintsa) ⚠</td></tr>
+  <tr><td>Max consecutive drives</td><td class="md">2 (9–10 May)</td><td class="ok">2 (6–7 May)</td></tr>
+  <tr><td>First 3N stay after Jock</td><td class="ok"><strong>Day 6</strong> (Phinda)</td><td class="md">Day 15 (Kwandwe)</td></tr>
+  <tr><td>Second-half rhythm</td><td class="ok"><strong>3N-3N-3N</strong></td><td>2N-2N-2N then 3N-3N</td></tr>
+  <tr><td>Visa dependency</td><td class="md">Sani — verifying</td><td class="ok">None</td></tr>
+  <tr><td>Safety profile</td><td class="ok">Highway + reserves</td><td class="md">Wild Coast friction</td></tr>
+  <tr><td>Total post-Kruger km</td><td>~3,060 + 150 Sani</td><td class="ok">~2,850</td></tr>
+</table>
+</div>
+</div>
+
+<!-- ============================== -->
+<!-- 4. NIGHT-BY-NIGHT SIDE-BY-SIDE -->
+<!-- ============================== -->
+<div class="sh">4. Night-by-Night Side-by-Side</div>
+
+<div class="compare">
+<div class="tw">
+<table>
+  <tr><th>Night</th><th>Date</th><th><span class="badge badge-a">Plan A</span></th><th><span class="badge badge-b">Plan B</span></th></tr>
+  <tr style="opacity:.55"><td>1</td><td>29 Apr</td><td colspan="2">The Highlander (Dullstroom) 🔒</td></tr>
+  <tr style="opacity:.55"><td>2</td><td>30 Apr</td><td colspan="2">Royal Malewane 🔒</td></tr>
+  <tr style="opacity:.55"><td>3</td><td>1 May</td><td colspan="2">Royal Malewane 🔒</td></tr>
+  <tr style="opacity:.55"><td>4</td><td>2 May</td><td colspan="2">Jock Safari Lodge 🔒</td></tr>
+  <tr style="opacity:.55"><td>5</td><td>3 May</td><td colspan="2">Jock Safari Lodge 🔒</td></tr>
+  <tr><td>6</td><td>4 May</td><td colspan="2">Phinda Rock Lodge</td></tr>
+  <tr><td>7</td><td>5 May</td><td colspan="2">Phinda Rock Lodge</td></tr>
+  <tr><td>8</td><td>6 May</td><td class="gold">Phinda Rock Lodge</td><td>The Oyster Box</td></tr>
+  <tr><td>9</td><td>7 May</td><td>Moorcroft Manor</td><td>GweGwe Beach Lodge</td></tr>
+  <tr><td>10</td><td>8 May</td><td>Moorcroft Manor (Sani)</td><td>GweGwe Beach Lodge</td></tr>
+  <tr><td>11</td><td>9 May</td><td class="md">La Riviera (transit)</td><td>Prana Lodge</td></tr>
+  <tr><td>12</td><td>10 May</td><td class="gold">Samara Manor</td><td>Prana Lodge</td></tr>
+  <tr><td>13</td><td>11 May</td><td class="gold">Samara Manor</td><td>Gorah Elephant Camp</td></tr>
+  <tr><td>14</td><td>12 May</td><td class="gold">Samara Manor</td><td>Gorah Elephant Camp</td></tr>
+  <tr><td>15</td><td>13 May</td><td class="gold">Kwandwe Melton</td><td class="gold">Kwandwe Melton</td></tr>
+  <tr><td>16</td><td>14 May</td><td class="gold">Kwandwe Melton</td><td class="gold">Kwandwe Melton</td></tr>
+  <tr><td>17</td><td>15 May</td><td class="gold">Kwandwe Melton</td><td class="gold">Kwandwe Melton</td></tr>
+  <tr><td>18</td><td>16 May</td><td>Tsala (Plett)</td><td>Tsala (Plett)</td></tr>
+  <tr><td>19</td><td>17 May</td><td>Tsala (Plett)</td><td>Tsala (Plett)</td></tr>
+  <tr><td>20</td><td>18 May</td><td>Tsala (Plett)</td><td>Tsala (Plett)</td></tr>
+  <tr><td></td><td>19 May</td><td colspan="2">→ Cape Town (Bushlore drop)</td></tr>
+  <tr><td>21–24</td><td>19–22 May</td><td colspan="2">Cape Town (4N)</td></tr>
+</table>
+</div>
+</div>
+
+<div class="note note-b">
+  <strong>Key structural difference:</strong> Plans diverge on night 8 (6 May) and reconverge at Kwandwe on night 15 (13 May). That's <strong>7 nights</strong> that are completely different. Plan A spends them on mountains + Karoo interior. Plan B spends them on Wild Coast + Addo elephants.
+</div>
+
+<!-- ============================== -->
+<!-- 5. DRIVING TIME AUDIT -->
+<!-- ============================== -->
+<div class="sh">5. Driving Time Audit — Google Maps vs Original Estimates</div>
+
+<div class="note note-y">
+  <strong>Why this section exists:</strong> Original driving times were TomTom-estimated using approximate coordinates. We re-verified every leg using Google Maps with exact lodge names on 24 Mar 2026. Google Maps consistently returned <strong>longer times</strong> on rural and reserve roads. All itinerary tables above now show the corrected Google Maps figures.
+</div>
+
+<div class="compare">
+<div class="tw">
+<table>
+  <tr><th>Leg</th><th>Old Est.</th><th>Google Maps</th><th>Delta</th><th>Flag</th></tr>
+  <tr><td colspan="5" style="color:#c9a84c;font-weight:600;font-size:.68rem;padding-top:.4rem">SHARED LEGS (Both Plans)</td></tr>
+  <tr><td>Midrand → Dullstroom</td><td>2h30m</td><td class="md"><strong>3h11m</strong></td><td class="hi">+41m</td><td>🔴</td></tr>
+  <tr><td>Dullstroom → Malewane</td><td>3h30m</td><td>3h18m</td><td class="ok">-12m</td><td>✅</td></tr>
+  <tr><td>Malewane → Jock</td><td>2h30m</td><td class="md"><strong>3h06m</strong></td><td class="hi">+36m</td><td>🔴 Kruger roads</td></tr>
+  <tr><td>Jock → Phinda</td><td>6h42m</td><td>6h34m</td><td class="ok">-8m</td><td>✅ via MR8</td></tr>
+  <tr><td>Kwandwe → Plett</td><td>4h00m</td><td class="md"><strong>4h36m</strong></td><td class="md">+36m</td><td>🟡</td></tr>
+  <tr><td>Plett → Cape Town</td><td>6h00m</td><td>5h58m</td><td class="ok">-2m</td><td>✅</td></tr>
+  <tr><td colspan="5" style="color:#34d399;font-weight:600;font-size:.68rem;padding-top:.6rem">PLAN A UNIQUE LEGS</td></tr>
+  <tr><td>Phinda → Underberg</td><td>5h42m</td><td class="md"><strong>6h18m</strong></td><td class="md">+36m</td><td>🟡 at 6h cap</td></tr>
+  <tr class="warn-row"><td><strong>Underberg → Aliwal Nth</strong></td><td>6h18m</td><td class="hi"><strong>7h03m</strong></td><td class="hi">+45m</td><td>🔴🔴 Breaks cap</td></tr>
+  <tr><td>Aliwal Nth → Samara</td><td>3h30m</td><td class="md"><strong>3h55m</strong></td><td class="md">+25m</td><td>🟡</td></tr>
+  <tr><td>Samara → Kwandwe</td><td>3h48m</td><td class="ok">3h04m</td><td class="ok">-44m</td><td>✅ over-estimated</td></tr>
+  <tr><td colspan="5" style="color:#fb923c;font-weight:600;font-size:.68rem;padding-top:.6rem">PLAN B UNIQUE LEGS (Google Maps verified)</td></tr>
+  <tr><td>Phinda → Umhlanga</td><td>3h00m</td><td>3h17m</td><td>+17m</td><td>✅</td></tr>
+  <tr><td>Umhlanga → GweGwe</td><td>5h00m</td><td class="md"><strong>5h48m</strong></td><td class="md">+48m</td><td>🟡</td></tr>
+  <tr class="warn-row"><td><strong>GweGwe → Chintsa</strong></td><td>6h42m</td><td class="hi"><strong>7h26m</strong></td><td class="hi">+44m</td><td>🔴🔴 Breaks cap</td></tr>
+  <tr><td>Chintsa → Addo</td><td>3h24m</td><td class="md"><strong>4h03m</strong></td><td class="md">+39m</td><td>🟡</td></tr>
+  <tr><td>Addo → Kwandwe</td><td>1h48m</td><td>2h00m</td><td>+12m</td><td>✅</td></tr>
+</table>
+</div>
+</div>
+
+<div class="note note-r">
+  <strong>Both plans have one leg that breaks the 6-hour driving cap:</strong><br>
+  • <strong>Plan A:</strong> Underberg → Aliwal North = <strong>7h03m</strong> (Google Maps verified). Requires 6 AM departure or splitting the leg.<br>
+  • <strong>Plan B:</strong> GweGwe → Chintsa = <strong>7h26m</strong> (Google Maps verified). Slow N2 through Mthatha. Worst single leg of either plan.<br><br>
+  Both plans also have 2–3 legs in the 6.0–6.6h range. Fuel + rest stops will add 30–45 min to any leg over 5h. <strong>Plan realistically with door-to-door times, not just driving times.</strong>
+</div>
+
+<!-- ============================== -->
+<!-- 6. THE QUESTION -->
+<!-- ============================== -->
+<div class="sh">6. The Question for the Family</div>
+
+<div style="background:#1a1d27;border:2px solid #c9a84c;border-radius:12px;padding:.8rem;margin:.5rem 0;text-align:center">
+  <p style="font-size:.85rem;color:#c9a84c;font-weight:700;margin-bottom:.4rem">What kind of trip do we want?</p>
+  <p style="font-size:.75rem;color:#e8e6e3;margin-bottom:.3rem">
+    <strong>Plan A</strong> = Landscape diversity + 4x4 adventure + exclusive-use Karoo stargazing<br>
+    <span class="dim">Mountains, passes, Karoo silence, 3N-3N-3N rhythm</span>
+  </p>
+  <p style="font-size:.75rem;color:#e8e6e3">
+    <strong>Plan B</strong> = Maximum wildlife + Wild Coast discovery + no rough nights<br>
+    <span class="dim">Three reserves, Michelin Key coast lodge, zero transit-tier accommodation</span>
+  </p>
+</div>
+
+<div class="note note-g">
+  <strong>Both plans include:</strong> Royal Malewane (Thornybush Big 5) · Jock (Kruger self-drive) · Phinda (KZN Big 5) · Kwandwe Melton Manor exclusive use (Eastern Cape Big 5) · Tsala Treetop Lodge (Garden Route) · 4 nights Cape Town. The only difference is the 7 nights between Phinda checkout and Kwandwe check-in.
+</div>
+
+<div class="foot">
+  SA Self-Drive 2026 · Decision Pack v7 · All driving times Google Maps–verified · 24 Mar 2026
+</div>
+
+</div><!-- end .w -->
+
+<script>
+function showRoute(id){
+  document.querySelectorAll('.tab-content').forEach(el=>el.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(el=>el.classList.remove('active'));
+  document.getElementById('route-'+id).classList.add('active');
+  event.target.classList.add('active');
+}
+</script>
+
+</body>
+</html>
